@@ -1,0 +1,6 @@
+
+management:
+  context-path: /application
+  port: 9090
+  security:
+    enabled: false
