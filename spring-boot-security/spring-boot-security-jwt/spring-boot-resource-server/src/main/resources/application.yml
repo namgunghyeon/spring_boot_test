@@ -1,0 +1,7 @@
+server:
+   port: 8081 # This is the default port anyway, but you can change it here
+
+security:
+  jwt:
+    token:
+      secret-key: secret-key
