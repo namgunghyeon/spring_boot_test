@@ -5,7 +5,6 @@ import com.example.demo.dto.UserDataDTO;
 import com.example.demo.dto.UserLoginDTO;
 import com.example.demo.dto.UserResponseDTO;
 import com.example.demo.model.User;
-import com.example.demo.security.CurrentUser;
 import com.example.demo.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.file.attribute.UserPrincipal;
 
 @RestController
 @RequestMapping("/users")
@@ -28,7 +26,7 @@ public class TestController {
 
     @PostMapping("/signup")
     public TokenResponseDTO signup(@RequestBody UserDataDTO user) {
-        String token = userService.signup(modelMapper.map(user, User.class));
+        String token = userService.signup(modelMapper.map(user, User.class), user.getRoleNames());
 
         return new TokenResponseDTO().convert(token);
     }

@@ -8,10 +8,11 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache' \
   -d '{
-	"username": "admin",
-	"email": "admin",
-	"password": "admin",
-	"roles": ["ROLE_CLIENT"]
+	"username": "admin5",
+	"email": "admin5@email.com",
+	"password": "admin5",
+	"name": "test",
+	"roleNames": ["ROLE_USER", "ROLE_ADMIN"]
 }'
 ```
 
@@ -22,8 +23,8 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache' \
   -d '{
-	"username": "admin",
-	"password": "admin"
+	"username": "admin5",
+	"password": "admin5"
 }'
 ```
 ## me

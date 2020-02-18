@@ -1,34 +1,70 @@
 package com.example.demo.model;
 
+import com.example.demo.model.audit.DateAudit;
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class User {
-
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "username"
+        }),
+        @UniqueConstraint(columnNames = {
+                "email"
+        })
+})
+public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Size(min = 4, max = 255, message = "Minimum username length: 4 characters")
-    @Column(unique = true, nullable = false)
+    @NotBlank
+    @Size(max = 40)
+    private String name;
+
+    @NotBlank
+    @Size(max = 15)
     private String username;
 
-    @Column(unique = true, nullable = false)
+    @NaturalId
+    @NotBlank
+    @Size(max = 40)
+    @Email
     private String email;
 
-    @Size(min = 8, message = "Minimum password length: 8 characters")
+    @NotBlank
+    @Size(max = 100)
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    List<Role> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-    public Integer getId() {
+    public User() {
+
+    }
+
+    public User(String name, String username, String email, String password) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,6 +74,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -56,12 +100,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 }

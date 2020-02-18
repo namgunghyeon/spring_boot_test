@@ -1,15 +1,17 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Role;
+import com.example.demo.model.RoleName;
 
 import java.util.List;
 
 public class UserDataDTO {
 
     private String username;
+    private String name;
     private String email;
     private String password;
-    List<Role> roles;
+
+    List<RoleName> roleNames;
 
     public String getUsername() {
         return username;
@@ -17,6 +19,14 @@ public class UserDataDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -35,12 +45,11 @@ public class UserDataDTO {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<RoleName> getRoleNames() {
+        return roleNames;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRoleNames(List<RoleName> roleNames) {
+        this.roleNames = roleNames;
     }
-
 }

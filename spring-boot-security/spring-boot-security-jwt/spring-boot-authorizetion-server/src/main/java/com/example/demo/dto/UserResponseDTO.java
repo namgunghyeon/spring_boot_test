@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.Role;
+import com.example.demo.model.RoleName;
 
 import java.util.List;
 
@@ -41,5 +42,4 @@ public class UserResponseDTO {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-
 }

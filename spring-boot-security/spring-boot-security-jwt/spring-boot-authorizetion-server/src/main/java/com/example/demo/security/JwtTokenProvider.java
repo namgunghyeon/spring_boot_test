@@ -2,6 +2,7 @@ package com.example.demo.security;
 
 import com.example.demo.exception.CustomException;
 import com.example.demo.model.Role;
+import com.example.demo.model.RoleName;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -18,10 +19,11 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -40,12 +42,11 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String username, List<Role> roles) {
-
+    public String createToken(String username, Set<Role> roles) {
         Claims claims = Jwts.claims().setSubject(username);
-        final String authorities = roles.stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+        String authorities = roles.stream().map(role ->
+                role.getName().name()
+        ).collect(Collectors.joining(","));
 
         claims.put("auth", authorities);
 
@@ -60,6 +61,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    @Transactional
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = myUserDetails.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
