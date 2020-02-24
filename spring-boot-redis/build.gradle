@@ -18,6 +18,9 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+    compile 'org.springframework.boot:spring-boot-starter-cache'
+    compile 'org.ehcache:ehcache'
+    compile 'javax.cache:cache-api'
     compile 'org.springframework.boot:spring-boot-starter-data-redis'
     compile 'org.springframework.boot:spring-boot-starter-web'
 }
