@@ -1,0 +1,27 @@
+= Sample API Documentation
+:toc: left
+:sectnums:
+
+== Introduction
+This is an example of Spring REST Docs generated documentation.
+
+== TEST API
+Collection of CRUD API endpoints used to manipulate persons registered in the application.
+
+=== Get test
+Obtains a specific person registered in the application by its unique identifier.
+
+==== Path Parameters
+include::{snippets}/test/path-parameters.adoc[]
+
+==== Response Fields
+include::{snippets}/test/response-fields.adoc[]
+
+==== Sample Request
+include::{snippets}/test/http-request.adoc[]
+
+==== Sample Response
+include::{snippets}/test/http-response.adoc[]
+
+==== CURL sample
+include::{snippets}/test/curl-request.adoc[]
