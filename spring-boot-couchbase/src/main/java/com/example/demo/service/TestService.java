@@ -6,6 +6,7 @@ import static com.couchbase.client.java.query.dsl.Expression.*;
 import com.couchbase.client.java.query.N1qlQuery;
 import com.couchbase.client.java.query.N1qlQueryResult;
 import com.couchbase.client.java.query.Statement;
+import com.example.demo.dao.CouchBaseDAO;
 import com.example.demo.model.Test;
 import com.example.demo.repository.TestRepository;
 import com.example.demo.utils.N1QL;
@@ -27,30 +28,12 @@ public class TestService {
     private TestRepository testRepository;
 
     @Autowired
+    private CouchBaseDAO couchBaseDAO;
+
+    @Autowired
     protected ObjectMapper objectMapper;
 
     public List<Test> getTest(String id) {
-        //move to dao
-        Statement statement = select("test.*")
-                .from(i("test"))
-                .where(x("`value`").eq(s("1")))
-                .limit(100);
-        N1qlQueryResult result = testRepository
-                .getCouchbaseOperations()
-                .getCouchbaseBucket()
-                .query(N1qlQuery.simple(statement));
-
-        List<Test> list = result.allRows().stream().map(item -> {
-            JsonNode jsonNode = N1QL.extractJsonResult(item, objectMapper);
-            try {
-                return new Test().toModel(jsonNode, objectMapper);
-            } catch (IOException e) {
-                logger.error(e.getLocalizedMessage());
-                return null;
-            }
-        }).collect(Collectors.toList());
-
-        return list;
-        //return testRepository.findById("test").orElseGet(null);
+        return couchBaseDAO.getTestData("1");
     }
 }
