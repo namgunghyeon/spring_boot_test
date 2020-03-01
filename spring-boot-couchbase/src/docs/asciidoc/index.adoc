@@ -11,8 +11,6 @@ Collection of CRUD API endpoints used to manipulate persons registered in the ap
 === Get test
 Obtains a specific person registered in the application by its unique identifier.
 
-==== Path Parameters
-include::{snippets}/test/path-parameters.adoc[]
 
 ==== Response Fields
 include::{snippets}/test/response-fields.adoc[]

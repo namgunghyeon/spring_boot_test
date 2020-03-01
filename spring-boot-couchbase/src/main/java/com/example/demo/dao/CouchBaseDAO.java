@@ -28,6 +28,7 @@ import static com.couchbase.client.java.query.dsl.Expression.x;
 public class CouchBaseDAO extends DAO {
     final private Logger logger = LoggerFactory.getLogger(CouchBaseDAO.class);
 
+
     private CouchbaseTemplate couchbaseTemplate;
     private ObjectMapper objectMapper;
 
@@ -48,5 +49,6 @@ public class CouchBaseDAO extends DAO {
         return result.allRows().stream().map(item -> this.toModel(objectMapper, item, Test.class))
         .filter(Objects::nonNull)
         .collect(Collectors.toList());
+
     }
 }
