@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<ApiValidationError> errors = ex.getBindingResult()
+        List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(x -> new ApiValidationError(x.getField() + ": " + x.getDefaultMessage()))
+                .map(x -> x.getField() + ": " + x.getDefaultMessage())
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.BAD_REQUEST, "Bad request", errors), HttpStatus.BAD_REQUEST);

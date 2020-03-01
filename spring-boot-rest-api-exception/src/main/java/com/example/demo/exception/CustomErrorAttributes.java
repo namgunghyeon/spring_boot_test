@@ -24,11 +24,10 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
         Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
 
-        List<ApiValidationError> errors = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
         final String error1 = errorAttributes.get("message").toString();
         final String error2 = errorAttributes.get("path").toString();
-        ApiValidationError apiValidationError1 = new ApiValidationError(error1 + "(path: " + error2 + ")");
-        errors.add(apiValidationError1);
+        errors.add(error1 + "(path: " + error2 + ")");
 
         int status = Integer.valueOf(errorAttributes.get("status").toString());
         HttpStatus httpStatus = HttpStatus.valueOf(status);

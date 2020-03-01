@@ -21,11 +21,10 @@ import java.util.stream.Collectors;
 public class RestResponseEntityExceptionHandler {
     @ExceptionHandler(value = {UnrecognizedPropertyException.class})
     protected ResponseEntity<Object> handleUnrecognizedPropertyException(UnrecognizedPropertyException ex) {
-        List<ApiValidationError> errors = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
 
         final String error = "JSON parse error: Unrecognized field " + "[ " + ex.getPropertyName() + " ]";
-        ApiValidationError apiValidationError = new ApiValidationError(error);
-        errors.add(apiValidationError);
+        errors.add(error);
 
         return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.BAD_REQUEST, "Bad request", errors), HttpStatus.BAD_REQUEST);
     }
