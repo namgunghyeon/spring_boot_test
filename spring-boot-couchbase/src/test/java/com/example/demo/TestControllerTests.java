@@ -43,10 +43,7 @@ public class TestControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean // (2)
+    @MockBean
     private TestService testService;
 
     @Test
@@ -76,7 +73,6 @@ public class TestControllerTests {
                                 fieldWithPath("[].id").type(JsonFieldType.STRING).description("id"),
                                 fieldWithPath("[].value").type(JsonFieldType.STRING).description("value"),
                                 fieldWithPath("[].field").type(JsonFieldType.STRING).description("field")
-
                         )
                 ));
 
