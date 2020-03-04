@@ -5,6 +5,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 public class TestController {
@@ -21,5 +22,15 @@ public class TestController {
     @PostMapping(path="/test")
     public TestRequestDTO test(@RequestBody @Valid TestRequestDTO testRequestDTO) {
         return testRequestDTO;
+    }
+
+    @GetMapping(path="/null-point")
+    public TestRequestDTO nullPoint() {
+        throw new NullPointerException("null point");
+    }
+
+    @GetMapping(path="/internal")
+    public TestRequestDTO internal() throws Exception {
+        throw new Exception("internal error");
     }
 }

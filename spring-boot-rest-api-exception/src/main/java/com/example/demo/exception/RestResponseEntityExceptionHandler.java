@@ -28,20 +28,26 @@ public class RestResponseEntityExceptionHandler {
     @ExceptionHandler({UnrecognizedPropertyException.class})
     protected ResponseEntity<Object> handleUnrecognizedPropertyException(UnrecognizedPropertyException ex) {
         List<String> errors = new ArrayList<>();
-
         final String error = "JSON parse error: Unrecognized field " + "[ " + ex.getPropertyName() + " ]";
         errors.add(error);
 
-        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.BAD_REQUEST, "Bad request", errors), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), errors), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ ResourceNotFoundException.class })
     protected ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.NOT_FOUND, "Not found"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({NoHandlerFoundException.class})
     protected ResponseEntity<Object> handleResourceNotFoundException(NoHandlerFoundException ex) {
-        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.NOT_FOUND, "Not found url"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({NullPointerException.class})
+    protected ResponseEntity<Object> handleNullPointerException(NullPointerException ex) {
+        List<String> errors = new ArrayList<>();
+        errors.add("null point");
+        return new ResponseEntity<>(new ApiErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "internal server error", errors), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

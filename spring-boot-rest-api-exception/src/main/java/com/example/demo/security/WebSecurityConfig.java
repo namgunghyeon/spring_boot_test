@@ -21,6 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test-notfound").permitAll()
                 .antMatchers("/test-notfound/{id}/test").permitAll()
                 .antMatchers("/test").permitAll()
+                .antMatchers("/null-point").permitAll()
+                .antMatchers("/internal").permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated();
     }
