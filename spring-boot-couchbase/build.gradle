@@ -28,6 +28,8 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+//    testCompile 'com.couchbase.mock:CouchbaseMock:1.5.19'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }

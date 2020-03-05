@@ -20,21 +20,18 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.couchbase.client.java.query.Select.select;
-import static com.couchbase.client.java.query.dsl.Expression.i;
-import static com.couchbase.client.java.query.dsl.Expression.s;
-import static com.couchbase.client.java.query.dsl.Expression.x;
+import static com.couchbase.client.java.query.dsl.Expression.*;
 
 @Service
 public class CouchBaseDAO extends DAO {
     final private Logger logger = LoggerFactory.getLogger(CouchBaseDAO.class);
 
 
-    private CouchbaseTemplate couchbaseTemplate;
     private ObjectMapper objectMapper;
 
     @Autowired
     public CouchBaseDAO(CouchbaseTemplate couchbaseTemplate, ObjectMapper objectMapper) {
-        this.couchbaseTemplate = couchbaseTemplate;
+        super(couchbaseTemplate);
         this.objectMapper = objectMapper;
     }
 
@@ -43,12 +40,14 @@ public class CouchBaseDAO extends DAO {
                 .from(i("test"))
                 .where(x("`value`").eq(s(id)))
                 .limit(100);
-        N1qlQueryResult result = couchbaseTemplate.getCouchbaseBucket()
-                .query(N1qlQuery.simple(statement));
+        N1qlQueryResult result = execute(statement);
 
         return result.allRows().stream().map(item -> this.toModel(objectMapper, item, Test.class))
         .filter(Objects::nonNull)
         .collect(Collectors.toList());
+    }
 
+    public void setCouchbaseTemplate(CouchbaseTemplate couchbaseTemplate) {
+        this.setTemplate(couchbaseTemplate);
     }
 }

@@ -2,9 +2,10 @@ package com.example.demo.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 public class CouchbaseSetting {
 
     protected static final Logger logger = LoggerFactory.getLogger(CouchbaseSetting.class);
@@ -18,7 +19,7 @@ public class CouchbaseSetting {
     private String username = "admin";
 
     public CouchbaseSetting() {
-        logger.info("Loading Couchbase properties");
+        logger.info("Loading Test Couchbase properties");
     }
 
 

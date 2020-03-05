@@ -78,7 +78,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
     @Bean(name = "testBucket") // this is to differentiate with the default beans
     public Bucket testBucket() throws Exception {
-        return couchbaseCluster().openBucket("test", "123456"); // TODO you can get values from properties
+        return couchbaseCluster().openBucket("test"); // TODO you can get values from properties
     }
 
     @Bean(name = "testBucketTemplate") // this is to differentiate with the default beans
