@@ -10,16 +10,21 @@ import com.example.demo.dao.CouchBaseDAO;
 import com.example.demo.dao.DAO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +34,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.any;
 
 @SpringBootTest
-@Import(CouchbaseConfig.class)
 public class CouchbaseDAOTests {
     @MockBean(name = "couchbaseTemplateTest")
     private CouchbaseTemplate couchbaseTemplate;
@@ -113,6 +117,8 @@ public class CouchbaseDAOTests {
                 return null;
             }
         };
+
+        System.out.println(couchbaseTemplate);
         given(couchbaseTemplate.getCouchbaseBucket()).willReturn(bucket);
         given(couchbaseTemplate.getCouchbaseBucket().query(any(N1qlQuery.class))).willReturn(n1qlQueryResult);
         couchBaseDAO.setCouchbaseTemplate(couchbaseTemplate);

@@ -10,7 +10,6 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 asciidoctor {
-
     dependsOn test
 }
 
@@ -39,6 +38,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-data-couchbase'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
+
+    testCompile group: 'com.couchbase.mock', name: 'CouchbaseMock', version: '1.5.25'
+    compile 'junit:junit:4.12'
 
 }
 
