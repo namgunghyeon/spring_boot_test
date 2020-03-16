@@ -13,6 +13,7 @@ asciidoctor {
     dependsOn test
 }
 
+
 bootJar {
     dependsOn asciidoctor
     from ("${asciidoctor.outputDir}/html5") {
@@ -20,6 +21,15 @@ bootJar {
     }
 }
 
+asciidoctor.doLast {
+    FileTree propFiles = fileTree("${asciidoctor.outputDir}/html5/index.html")
+    propFiles.each { File propFile ->
+        println "Start replacing regex on $propFile.name"
+        String context = propFile.getText()
+        context = context.replace("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=none\">", "<div></div>")
+        propFile.setText(context)
+    }
+}
 
 repositories {
     mavenCentral()

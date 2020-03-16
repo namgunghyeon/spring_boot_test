@@ -1,5 +1,6 @@
 = Sample API Documentation
 :toc: left
+:webfonts: none
 :sectnums:
 
 == Introduction

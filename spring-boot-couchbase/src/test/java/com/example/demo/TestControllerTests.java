@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestComponent;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.hypermedia.HypermediaDocumentation;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,20 +26,13 @@ import static com.example.demo.ApiDocumentUtils.getDocumentRequest;
 import static com.example.demo.ApiDocumentUtils.getDocumentResponse;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.beneathPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-
 
 @WebMvcTest(TestController.class)
-@AutoConfigureRestDocs(uriScheme = "https", uriHost = "docs.api.com") // (1)
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "docs.api.com")
 public class TestControllerTests {
     @Autowired
     private MockMvc mockMvc;
@@ -64,7 +58,6 @@ public class TestControllerTests {
                         .accept(MediaType.APPLICATION_JSON)
         );
 
-        System.out.println(result.toString());
         result.andExpect(status().isOk())
                 .andDo(document("test",
                         getDocumentRequest(),
