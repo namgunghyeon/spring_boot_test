@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    # Specify application name
+    name: prometheus-demo
+management:
+  endpoints:
+    web:
+      exposure:
+        # Expose Actuator's/actuator/prometheus endpoint
+        include: 'prometheus'
+  metrics:
+    tags:
+      # Set a Tag for the metric, set here to the application name, Tag is one of the capabilities provided by Prometheus for more flexible filtering
+      application: ${spring.application.name}
