@@ -51,6 +51,13 @@ public class TestController {
         return new TokenResponseDTO().convert(token);
     }
 
+
+    @GetMapping(value = "/me2")
+    @PreAuthorize("@permissionEvaluator.hasAccessRole(principal, \"/me2\")")
+    public UserResponseDTO test(HttpServletRequest req, Authentication auth) {
+        return modelMapper.map(userService.whoami(req), UserResponseDTO.class);
+    }
+
     @Bean
     private ModelMapper modelMapper() {
         return new ModelMapper();

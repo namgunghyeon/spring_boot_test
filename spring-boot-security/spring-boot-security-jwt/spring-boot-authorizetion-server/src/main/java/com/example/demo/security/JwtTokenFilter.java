@@ -24,12 +24,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String token = jwtTokenProvider.resolveToken(httpServletRequest);
         try {
+
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
+                UserAccount userAccount = (UserAccount)auth.getPrincipal();
+                // check uri
+                System.out.println(userAccount.getAccessibleeUris().contains(httpServletRequest.getRequestURI()));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         } catch (CustomException ex) {
-            SecurityContextHolder.clearContext();    //this is very important, since it guarantees the user is not authenticated at all
+            SecurityContextHolder.clearContext(); //this is very important, since it guarantees the user is not authenticated at all
             httpServletResponse.sendError(ex.getHttpStatus().value(), ex.getMessage());
 
         }

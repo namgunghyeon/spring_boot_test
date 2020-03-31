@@ -35,6 +35,16 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache'
 ```
+
+## me2
+```$xslt
+curl -X GET \
+  http://localhost:8080/users/me2 \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX1VTRVIiLCJpYXQiOjE1ODU2NTYwMjAsImV4cCI6MTU4NTY1NjMyMH0.z93cot0_2cFY_dnI2Aw6K2M7F1T7k4JzRrqRQ3wZLjY' \
+  -H 'Content-Type: application/json' \
+  -H 'cache-control: no-cache'
+```
+
 ## refresh
 ```$xslt
 curl -X GET \

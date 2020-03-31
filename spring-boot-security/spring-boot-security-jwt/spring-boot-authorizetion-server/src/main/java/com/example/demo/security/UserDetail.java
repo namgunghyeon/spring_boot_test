@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserDetail implements UserDetailsService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -27,13 +26,16 @@ public class UserDetail implements UserDetailsService {
         }
 
         user.getRoles().size();
-
-
-
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
 
+        UserAccount userAccount = new UserAccount(user, authorities);
+        userAccount.addAccessibleUris("/me2");
+        userAccount.addAccessibleUris("/me");
+
+        return userAccount;
+        /*
         return org.springframework.security.core.userdetails.User
                 .withUsername(username)
                 .password(user.getPassword())
@@ -43,6 +45,7 @@ public class UserDetail implements UserDetailsService {
                 .credentialsExpired(false)
                 .disabled(false)
                 .build();
+                */
     }
 
 }
