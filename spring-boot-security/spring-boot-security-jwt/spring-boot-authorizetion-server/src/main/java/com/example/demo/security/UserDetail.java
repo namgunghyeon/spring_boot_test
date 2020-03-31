@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.config.DynamicMetaConfiguration;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 public class UserDetail implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DynamicMetaConfiguration dynamicMetaConfiguration;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,9 +35,9 @@ public class UserDetail implements UserDetailsService {
                 new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
 
+        List<GrantedAuthority> authorities2 = Arrays.asList(new SimpleGrantedAuthority(dynamicMetaConfiguration.getKeyProps(username).getUri()));
         UserAccount userAccount = new UserAccount(user, authorities);
-        userAccount.addAccessibleUris("/me2");
-        userAccount.addAccessibleUris("/me");
+        userAccount.setKeyProps(dynamicMetaConfiguration.getKeyProps(username));
 
         return userAccount;
         /*

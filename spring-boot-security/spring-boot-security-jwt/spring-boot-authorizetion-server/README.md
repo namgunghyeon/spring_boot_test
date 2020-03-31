@@ -31,7 +31,7 @@ curl -X POST \
 ```$xslt
 curl -X GET \
   http://localhost:8080/users/me \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlhdCI6MTU4MTc0NjY3MywiZXhwIjoxNTgxNzQ2OTczfQ.wAs3_ofpb0ds9zId57S01IgWElpPt7RxV99Sn3AYjCE' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9VU0VSLFJPTEVfQURNSU4iLCJpYXQiOjE1ODU2NTc2NjksImV4cCI6MTU4NTY1Nzk2OX0.xTrWAbpwLVlp99lWjd1HrhwPo867lttwMCXohFnbxww' \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache'
 ```
@@ -40,7 +40,7 @@ curl -X GET \
 ```$xslt
 curl -X GET \
   http://localhost:8080/users/me2 \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX1VTRVIiLCJpYXQiOjE1ODU2NTYwMjAsImV4cCI6MTU4NTY1NjMyMH0.z93cot0_2cFY_dnI2Aw6K2M7F1T7k4JzRrqRQ3wZLjY' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9VU0VSLFJPTEVfQURNSU4iLCJpYXQiOjE1ODU2NTgzMTcsImV4cCI6MTU4NTY1ODYxN30.MBoUcPwff63RdOdSWGYGz2sRh3BP316qKXKzPKHbFLo' \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache'
 ```

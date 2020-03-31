@@ -22,6 +22,7 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
     }
 
     public boolean hasAccessRole(UserAccount userAccount, String uri) {
-        return userAccount.getAccessibleeUris().contains(uri);
+        System.out.println(userAccount.getKeyProps().getUri() + " - " +  uri);
+        return userAccount.getKeyProps().getUri().equals(uri);
     }
 }

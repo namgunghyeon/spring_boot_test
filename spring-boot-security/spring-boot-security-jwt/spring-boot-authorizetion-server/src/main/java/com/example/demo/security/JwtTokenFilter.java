@@ -3,6 +3,7 @@ package com.example.demo.security;
 import com.example.demo.exception.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -27,9 +28,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
+
                 UserAccount userAccount = (UserAccount)auth.getPrincipal();
                 // check uri
-                System.out.println(userAccount.getAccessibleeUris().contains(httpServletRequest.getRequestURI()));
+                //authorites에 uri를 넣어서 체크
+                System.out.println(auth.getAuthorities().contains(new SimpleGrantedAuthority(httpServletRequest.getRequestURI())));
+
+                //uri 체크
+                System.out.println(userAccount.getKeyProps().getUri().equals(httpServletRequest.getRequestURI()));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         } catch (CustomException ex) {
