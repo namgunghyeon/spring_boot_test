@@ -23,13 +23,13 @@ public class UserDetail implements UserDetailsService {
     @Autowired
     private DynamicMetaConfiguration dynamicMetaConfiguration;
 
+    //12121-1212121-111-21212-121212121-121212121 -> sha-256('test', '12121-1212121-111-21212-121212121-121212121') -> b49d3b6e794c644528970e844396cac36f1667586f79412bc7514a34eef2854a -> base64 ->
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         final User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
-
         user.getRoles().size();
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName().name())

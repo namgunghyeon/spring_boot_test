@@ -24,4 +24,8 @@ public class UserAccount extends User {
     public KeyProps getKeyProps() {
         return keyProps;
     }
+
+    public com.example.demo.model.User getUser() {
+        return user;
+    }
 }

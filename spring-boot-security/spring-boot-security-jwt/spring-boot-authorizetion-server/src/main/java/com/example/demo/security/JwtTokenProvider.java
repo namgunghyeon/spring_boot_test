@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 @Component
 public class JwtTokenProvider {
     @Value("${security.jwt.token.secret-key:secret-key}")

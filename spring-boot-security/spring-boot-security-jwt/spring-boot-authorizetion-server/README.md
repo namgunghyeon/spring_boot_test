@@ -8,9 +8,9 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache' \
   -d '{
-	"username": "admin5",
-	"email": "admin5@email.com",
-	"password": "admin5",
+	"username": "admin6",
+	"email": "admin6@email.com",
+	"password": "admin6",
 	"name": "test",
 	"roleNames": ["ROLE_USER", "ROLE_ADMIN"]
 }'
@@ -31,7 +31,7 @@ curl -X POST \
 ```$xslt
 curl -X GET \
   http://localhost:8080/users/me \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9VU0VSLFJPTEVfQURNSU4iLCJpYXQiOjE1ODU2NTc2NjksImV4cCI6MTU4NTY1Nzk2OX0.xTrWAbpwLVlp99lWjd1HrhwPo867lttwMCXohFnbxww' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9VU0VSLFJPTEVfQURNSU4iLCJpYXQiOjE1ODU3OTQ4MjgsImV4cCI6MTU4NTc5NTEyOH0.l6Eh2wWMaMFaZVeZzIzSYk7bmklIzwiqlsKAhLFZryI' \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache'
 ```
