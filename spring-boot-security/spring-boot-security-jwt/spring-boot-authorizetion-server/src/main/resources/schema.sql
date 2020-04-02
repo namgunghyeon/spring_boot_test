@@ -29,3 +29,25 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
   CONSTRAINT `fk_user_roles_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+create table IF NOT EXISTS service
+(
+	id bigint not null
+		primary key,
+	is_activate int not null,
+	access_uri varchar(256) not null
+);
+
+create table IF NOT EXISTS access_key
+(
+	id bigint not null primary key,
+	`key` varchar(256) not null,
+	service_id bigint null,
+	constraint FK2gbal31bkuum2lyqeo8uw652
+		foreign key (id) references service (id),
+	constraint FKgnxauijpqedjypjfh2agbo1ax
+		foreign key (service_id) references service (id)
+);
+
+-- create index FKgnxauijpqedjypjfh2agbo1ax on access_key (service_id);
+
