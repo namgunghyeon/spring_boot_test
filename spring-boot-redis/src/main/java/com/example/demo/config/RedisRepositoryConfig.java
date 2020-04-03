@@ -17,7 +17,7 @@ public class RedisRepositoryConfig {
     @ConditionalOnMissingBean(RedisConnectionFactory.class)
     public RedisConnectionFactory redisConnectionFactory() {
         RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration()
-                .clusterNode("10.0.0.8",5000);
+                .clusterNode("localhost",6379);
 
         return new LettuceConnectionFactory(clusterConfiguration);
     }

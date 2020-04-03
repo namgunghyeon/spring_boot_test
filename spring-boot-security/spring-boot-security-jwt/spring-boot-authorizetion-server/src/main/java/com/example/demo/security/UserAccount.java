@@ -12,17 +12,18 @@ public class UserAccount extends User {
     private com.example.demo.model.User user;
     //user에 포함된 정보가 아닌 추가 정보
     private KeyProps keyProps;
-    public UserAccount(com.example.demo.model.User user, List<GrantedAuthority> authorities) {
+    public UserAccount(com.example.demo.model.User user, KeyProps keyProps, List<GrantedAuthority> authorities) {
         super(user.getEmail(), user.getPassword(), authorities);
         this.user = user;
+        this.keyProps = keyProps;
     }
-
+/*
     public void setKeyProps(KeyProps keyProps) {
         this.keyProps = keyProps;
     }
-
+*/
     public KeyProps getKeyProps() {
-        return keyProps;
+        return this.keyProps;
     }
 
     public com.example.demo.model.User getUser() {

@@ -31,7 +31,7 @@ curl -X POST \
 ```$xslt
 curl -X GET \
   http://localhost:8080/users/me \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9VU0VSLFJPTEVfQURNSU4iLCJpYXQiOjE1ODU3OTQ4MjgsImV4cCI6MTU4NTc5NTEyOH0.l6Eh2wWMaMFaZVeZzIzSYk7bmklIzwiqlsKAhLFZryI' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX1VTRVIiLCJpYXQiOjE1ODU5MDEwOTgsImV4cCI6MTU4NTkwMTM5OH0.3eY4rkB5RVOJNuC69dD_3sdkVqNXZ_B2urRvnj-I5zQ' \
   -H 'Content-Type: application/json' \
   -H 'cache-control: no-cache'
 ```

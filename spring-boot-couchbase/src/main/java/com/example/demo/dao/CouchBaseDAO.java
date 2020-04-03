@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.query.N1qlQuery;
 import com.couchbase.client.java.query.N1qlQueryResult;
 import com.couchbase.client.java.query.N1qlQueryRow;

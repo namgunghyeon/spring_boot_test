@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.KeyProps;
 import com.example.demo.dto.TokenResponseDTO;
 import com.example.demo.dto.UserDataDTO;
 import com.example.demo.dto.UserLoginDTO;
@@ -52,7 +53,7 @@ public class TestController {
     }
 
     @GetMapping(value = "/me")
-    public UserResponseDTO whoami(@CurrentAccount UserAccount userAccount, HttpServletRequest req) {
+    public UserResponseDTO whoami(@CurrentAccount KeyProps keyProps, HttpServletRequest req) {
         return modelMapper.map(userService.whoami(req), UserResponseDTO.class);
     }
 

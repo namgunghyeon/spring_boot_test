@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutionException;
+
 @RestController
 public class RedisController {
     @Autowired
@@ -19,16 +21,20 @@ public class RedisController {
     @Autowired
     private TestService testService;
 
-    @GetMapping(path="redis")
+    @GetMapping(path="/redis")
     public ApiResponse<String> redis() {
         String data = stringRedisTemplate.opsForValue().get("test");
 
         return new ApiResponse<String>(data);
     }
 
-    @GetMapping(path = "cache")
+    @GetMapping(path = "/cache")
     public String getData() {
         return testService.getData("test");
     }
 
+    @GetMapping(path = "/test")
+    public String test() throws ExecutionException, InterruptedException  {
+        return testService.get("test");
+    }
 }
