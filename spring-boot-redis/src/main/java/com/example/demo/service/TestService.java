@@ -12,6 +12,8 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class TestService {
@@ -29,13 +31,13 @@ public class TestService {
         return id;
     }
 
-    public String get(String key) throws ExecutionException, InterruptedException {
+    public String get(String key) throws ExecutionException, InterruptedException, TimeoutException {
         System.out.println(localRedisClient);
         RedisStringAsyncCommands<String, String> async = localRedisClient.getConnection().async();
         System.out.println(async);
         RedisFuture<String> get = async.get(key);
 
-        return get.get();
+        return get.get(1100, TimeUnit.MILLISECONDS);
     }
 
     public String get2(String key) {

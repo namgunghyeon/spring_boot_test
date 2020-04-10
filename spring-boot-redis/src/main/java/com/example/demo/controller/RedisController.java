@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 public class RedisController {
@@ -34,7 +35,7 @@ public class RedisController {
     }
 
     @GetMapping(path = "/test")
-    public String test() throws ExecutionException, InterruptedException  {
+    public String test() throws ExecutionException, InterruptedException, TimeoutException {
         return testService.get("test");
     }
 }
