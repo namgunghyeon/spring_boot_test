@@ -1,9 +1,12 @@
 package com.example.demo;
 
+import com.example.demo.config.CouchbaseStartConfig;
 import com.example.demo.config.LocalCouchbaseCluster;
 import com.example.demo.controller.TestController;
 import com.example.demo.service.TestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -43,6 +46,16 @@ public class TestControllerTests {
 
     @MockBean
     private LocalCouchbaseCluster localCouchbaseCluster;
+
+    @BeforeAll
+    static void start () {
+        CouchbaseStartConfig.couchbaseStart();
+    }
+
+    @AfterAll
+    static void stop () {
+        CouchbaseStartConfig.couchbaseStop();
+    }
 
     @Test
     public void test() throws Exception {

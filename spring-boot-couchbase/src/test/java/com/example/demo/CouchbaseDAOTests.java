@@ -5,11 +5,15 @@ import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.CouchbaseBucket;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.query.*;
+import com.couchbase.mock.BucketConfiguration;
+import com.couchbase.mock.CouchbaseMock;
 import com.example.demo.config.CouchbaseConfig;
+import com.example.demo.config.CouchbaseStartConfig;
 import com.example.demo.dao.CouchBaseDAO;
 import com.example.demo.dao.DAO;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,6 +30,8 @@ import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -50,6 +56,15 @@ public class CouchbaseDAOTests {
         }
     }
 
+    @BeforeAll
+     static void start () {
+        CouchbaseStartConfig.couchbaseStart();
+    }
+
+    @AfterAll
+    static void stop () {
+        CouchbaseStartConfig.couchbaseStop();
+    }
 
     @Autowired
     private CouchBaseDAO couchBaseDAO;
@@ -126,4 +141,5 @@ public class CouchbaseDAOTests {
 
         Assertions.assertEquals(list.size(), 0);
     }
+
 }
