@@ -32,9 +32,7 @@ public class TestService {
     }
 
     public String get(String key) throws ExecutionException, InterruptedException, TimeoutException {
-        System.out.println(localRedisClient);
         RedisStringAsyncCommands<String, String> async = localRedisClient.getConnection().async();
-        System.out.println(async);
         RedisFuture<String> get = async.get(key);
 
         return get.get(1100, TimeUnit.MILLISECONDS);

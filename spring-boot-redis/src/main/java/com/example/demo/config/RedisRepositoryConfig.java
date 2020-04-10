@@ -18,10 +18,10 @@ public class RedisRepositoryConfig {
     @Bean
     @ConditionalOnMissingBean(RedisConnectionFactory.class)
     public RedisConnectionFactory redisConnectionFactory() {
-        RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration()
-                .clusterNode("localhost",6379);
+        //RedisClusterConfiguration clusterConfiguration = new RedisClusterConfiguration()
+        //        .clusterNode("localhost",6379);
 
-        return new LettuceConnectionFactory(clusterConfiguration);
+        return new LettuceConnectionFactory("localhost", 6379);
     }
 
     @Bean

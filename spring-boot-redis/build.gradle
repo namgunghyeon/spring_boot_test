@@ -23,6 +23,7 @@ dependencies {
     compile 'javax.cache:cache-api'
     compile 'org.springframework.boot:spring-boot-starter-data-redis'
     compile 'org.springframework.boot:spring-boot-starter-web'
+    testCompile 'it.ozimov:embedded-redis:0.7.2'
 }
 
 test {

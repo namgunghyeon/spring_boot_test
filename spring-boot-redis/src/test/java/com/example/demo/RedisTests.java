@@ -1,11 +1,14 @@
 package com.example.demo;
 
+import com.example.demo.config.EmbeddedRedisConfig;
 import com.example.demo.config.LocalRedisClient;
 import com.example.demo.service.TestService;
 import io.lettuce.core.RedisFuture;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.async.RedisAsyncCommands;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -16,6 +19,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @SpringBootTest
 public class RedisTests {
@@ -47,13 +52,23 @@ public class RedisTests {
     @MockBean
     private RedisFuture<String> redisFuture;
 
+    @BeforeAll
+    static void start () {
+        EmbeddedRedisConfig.start();
+    }
+
+    @AfterAll
+    static void stop () {
+        EmbeddedRedisConfig.stop();
+    }
+
     @Test
-    void get1Test() throws ExecutionException, InterruptedException {
+    void get1Test() throws ExecutionException, InterruptedException, TimeoutException {
         String returnValue = "returnValue";
         Mockito.when(statefulRedisConnection.async()).thenReturn(redisAsyncCommands);
         Mockito.when(localRedisClient.getConnection()).thenReturn(statefulRedisConnection);
         Mockito.when(redisAsyncCommands.get(Mockito.anyString())).thenReturn(redisFuture);
-        Mockito.when(redisFuture.get()).thenReturn(returnValue);
+        Mockito.when(redisFuture.get(Mockito.anyLong(), Mockito.any(TimeUnit.class))).thenReturn(returnValue);
 
         String ret = testService.get("test");
         Assertions.assertEquals("returnValue", ret);
