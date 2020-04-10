@@ -26,7 +26,10 @@ dependencies {
     compile 'mysql:mysql-connector-java'
     compile 'org.modelmapper:modelmapper:2.3.5'
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    compile 'io.jsonwebtoken:jjwt:0.9.1'
+    // https://mvnrepository.com/artifact/com.wix/wix-embedded-mysql
+    testCompile 'com.wix:wix-embedded-mysql:4.6.1'
+    //testCompile 'org.hibernate:hibernate-entitymanager:5.2.9.Final'
 }
 
 test {
