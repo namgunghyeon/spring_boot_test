@@ -13,9 +13,9 @@ public class CouchbaseSetting {
 
     private String bucketName = "test";
 
-    private String password = "123456";
+    private String password = "password";
 
-    private String username = "admin";
+    private String username = "Administrator";
 
     public CouchbaseSetting() {
         logger.info("Loading Couchbase properties");

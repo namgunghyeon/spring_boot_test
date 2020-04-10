@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.config.LocalCouchbaseCluster;
 import com.example.demo.controller.TestController;
 import com.example.demo.service.TestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +40,9 @@ public class TestControllerTests {
 
     @MockBean
     private TestService testService;
+
+    @MockBean
+    private LocalCouchbaseCluster localCouchbaseCluster;
 
     @Test
     public void test() throws Exception {
