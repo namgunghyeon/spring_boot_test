@@ -23,7 +23,7 @@ import static com.wix.mysql.distribution.Version.v5_7_19;
 import static com.wix.mysql.distribution.Version.v8_latest;
 import static java.lang.String.format;
 
-@Configuration
+//@Configuration
 public class EmbeddedMysqlConfig {
     @Autowired
     EmbeddedMysql embeddedMysql;
