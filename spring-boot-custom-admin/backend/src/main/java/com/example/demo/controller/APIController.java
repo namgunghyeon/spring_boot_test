@@ -187,6 +187,7 @@ public class APIController {
     public ResponseEntity createService(@PathVariable Long id, Authentication auth) {
         //service 추가
         //group_service 추가
+
         Group group = groupRepository.findById(id).orElseThrow(() -> new CustomException("Resource Not found", HttpStatus.NOT_FOUND));
         Service service = new Service("test", 1);
         group.addService(service);
@@ -202,11 +203,12 @@ public class APIController {
     public ResponseEntity getService(@PathVariable Long groupId, @PathVariable Long serviceId, Authentication auth) {
         CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
         User user = userRepository.findById(customUserDetails.getUser().getId()).orElseThrow(() -> new CustomException("Invalid token", HttpStatus.UNAUTHORIZED));
-
         Group group = user.getGroups().stream().filter(item -> item.getId().equals(groupId)).findFirst().orElseThrow(() -> new CustomException("Invalid token", HttpStatus.UNAUTHORIZED));
         Service service = group.getServices().stream().filter(item -> item.getId().equals(serviceId)).findFirst().orElseThrow(() -> new CustomException("Invalid token", HttpStatus.UNAUTHORIZED));
-
-        return ResponseEntity.ok().body(service);
+        System.out.println(service.getGroups());
+        List<Service> services = serviceRepository.findByGroupsIn(user.getGroups().stream().collect(Collectors.toList()));
+        System.out.println(services.size());
+        return ResponseEntity.ok().body("");
     }
 
     @GetMapping(path ="/api/test")

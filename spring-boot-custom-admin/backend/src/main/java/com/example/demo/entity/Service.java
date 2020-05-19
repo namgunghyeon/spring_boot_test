@@ -8,6 +8,12 @@ import java.util.Set;
         name = "Service.withAccessKeys",
         attributeNodes = @NamedAttributeNode("accessKeys")
 )
+
+
+@NamedEntityGraph(
+        name = "Service.withGroups",
+        attributeNodes = @NamedAttributeNode("groups")
+)
 */
 @Entity
 @Table(name = "service")
@@ -22,6 +28,14 @@ public class Service {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "service")
     private Set<AccessKey> accessKeys;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "group_service",
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<Group> groups;
+
 
     public Service(String accessUri, int isActivated) {
         this.accessUri = accessUri;
@@ -45,4 +59,13 @@ public class Service {
     public Set<AccessKey> getAccessKeys() {
         return accessKeys;
     }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
 }

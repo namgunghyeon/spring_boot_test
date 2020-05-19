@@ -20,7 +20,7 @@ public class Group {
     @Size(max = 100)
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY,    cascade = {
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
