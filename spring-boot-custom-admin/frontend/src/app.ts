@@ -33,6 +33,15 @@ logger[level] = function levelFn(...args) {
   console[level].apply(console, arguments);
 };
 
+const loggingMiddleware = (store) => (next) => (action) => {
+  // Our middleware
+  console.log(store);
+  const state = store.getState();
+  console.log(state);
+  console.log(action);
+  next(action);
+};
+
 export const dva = {
   config: {
     onError(err: ErrorEvent) {
@@ -45,6 +54,7 @@ export const dva = {
         actionTransformer,
         logger,
       }),
+      loggingMiddleware,
     ],
   },
 };

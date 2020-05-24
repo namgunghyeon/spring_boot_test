@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-public class APIController {
+public class APIController extends AuthorizedResource{
     @Autowired
     private TokenProvider tokenProvider;
     @Autowired

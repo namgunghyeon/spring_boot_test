@@ -14,6 +14,7 @@ import { Link, useIntl, connect, Dispatch } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
+import Authorized2 from '@/pages/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { getAuthorityFromRouter } from '@/utils/utils';
@@ -162,6 +163,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       <Authorized authority={authorized!.authority} noMatch={noMatch}>
         {children}
       </Authorized>
+      <Authorized2 {...props}>
+        <div> test </div>
+      </Authorized2>
     </ProLayout>
   );
 };
