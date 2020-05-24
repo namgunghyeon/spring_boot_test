@@ -22,7 +22,8 @@ public class AuthorizedResource {
         auth().checkHasAnyRole(roles);
     }
 
-    public void checkAuthority() {
+    public <T> void checkAuthority(T entitiy) {
+        auth().checkAuthority(entitiy);
     }
 
     @Bean
