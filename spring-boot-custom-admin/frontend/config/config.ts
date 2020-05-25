@@ -61,6 +61,7 @@ export default defineConfig({
               name: 'admin',
               icon: 'crown',
               component: './Admin',
+              access: 'red',
               authority: ['admin'],
               routes: [
                 {

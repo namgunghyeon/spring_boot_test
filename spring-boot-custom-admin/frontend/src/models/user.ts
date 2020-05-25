@@ -14,6 +14,7 @@ export interface CurrentUser {
   }[];
   userid?: string;
   unreadCount?: number;
+  currentAuthority?: [string];
 }
 
 export interface UserModelState {

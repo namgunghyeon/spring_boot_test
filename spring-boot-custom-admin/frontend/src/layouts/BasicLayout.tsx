@@ -51,12 +51,6 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
  * use Authorized check all menu item
  */
 
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
-  menuList.map((item) => {
-    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
-    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
-  });
-
 const defaultFooterDom = (
   <DefaultFooter
     copyright="2019 蚂蚁金服体验技术部出品"
@@ -116,11 +110,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     }
   }; // get children authority
 
+  const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+    menuList.map((item) => {
+      const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+      return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+    });
+
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
   const { formatMessage } = useIntl();
-
   return (
     <ProLayout
       logo={logo}
@@ -170,7 +169,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   );
 };
 
-export default connect(({ global, settings }: ConnectState) => ({
+export default connect(({ global, settings, user }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
+  user,
 }))(BasicLayout);
