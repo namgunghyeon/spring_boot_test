@@ -1,13 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Group;
-import com.example.demo.entity.Service;
-import com.example.demo.entity.User;
+import com.example.demo.entity.*;
 import com.example.demo.exception.CustomException;
-import com.example.demo.repository.GroupRepository;
-import com.example.demo.repository.ServiceRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.*;
 import com.example.demo.security.TokenProvider;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +32,39 @@ public class APIController extends AuthorizedResource{
     private ServiceRepository serviceRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private TeamRepository teamRepository;
+    @Autowired
+    private TeamHistoryRepository teamHistoryRepository;
+    @Autowired
+    private TeamTestRepository teamTestRepository;
+    @Autowired
+    private TeamHistoryTestRepository teamHistoryTestRepository;
 
     @GetMapping(path = "/")
     public String welcome() {
+        Optional<Team> team = teamRepository.findById(1L);
+
+        Team team1 = new Team("test");
+        teamRepository.save(team1);
+        TeamHistory teamHistory = new TeamHistory(team1, "test");
+
+        teamHistoryRepository.save(teamHistory);
+        return "welcome";
+    }
+
+    @GetMapping(path = "/test")
+    public String welcomeTest() {
+        Optional<TeamTest> team = teamTestRepository.findById(1L);
+
+        TeamTest team1 = new TeamTest("test");
+        teamTestRepository.save(team1);
+        TeamHistoryTest teamHistoryTest = new TeamHistoryTest(team1, "test");
+
+        teamHistoryTestRepository.save(teamHistoryTest);
+        team1.setTeamHistoryTestId(teamHistoryTest.getId());
+        teamTestRepository.save(team1);
+
         return "welcome";
     }
 

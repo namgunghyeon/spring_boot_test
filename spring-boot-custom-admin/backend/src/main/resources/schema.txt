@@ -76,5 +76,34 @@ create table IF NOT EXISTS access_key
 		foreign key (service_id) references service (id)
 );
 
+create table IF NOT EXISTS team
+(
+	id bigint not null primary key AUTO_INCREMENT,
+	name varchar(256) not null
+);
+
+
+create table IF NOT EXISTS team_history
+(
+	id bigint not null primary key AUTO_INCREMENT,
+	team_id bigint not null,
+	name varchar(256) not null
+);
+
+create table IF NOT EXISTS team_test
+  (
+  	id bigint not null primary key AUTO_INCREMENT,
+  	team_history_test bigint,
+  	name varchar(256) not null
+  );
+
+create table IF NOT EXISTS team_history_test
+(
+	id bigint not null primary key AUTO_INCREMENT,
+	team_test_id bigint not null,
+	name varchar(256) not null
+);
+
+
 -- create index FKgnxauijpqedjypjfh2agbo1ax on access_key (service_id);
 
