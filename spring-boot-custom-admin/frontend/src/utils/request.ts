@@ -5,6 +5,8 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 
+import moment from 'moment';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -51,11 +53,11 @@ const errorHandler = (error: { response: Response }): Response => {
 const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie,
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MyIsImlhdCI6MTU4OTU1NTkyNywiZXhwIjoxNTg5NTU5NTI3fQ.TWUqhakF84ZEfXXjwupq2RwtKfelPP85QMS2xcpgzQDlt9YbTh7F4PkacNUzXx_DYVGI9TBHt0w7KcydMgyv6Q',
-  },
+});
+
+request.use(async (ctx: any, next: any) => {
+  localStorage.setItem('lastUsedTime', JSON.stringify(moment().valueOf()));
+  await next();
 });
 
 export default request;
